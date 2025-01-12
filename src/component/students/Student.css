@@ -1,0 +1,207 @@
+.form-container {
+    max-width: 600px;
+    margin-top: 72px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-style: unset;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Container styling */
+
+.student-table-container {
+    margin: 20px auto;
+    padding: 10px;
+    width: 90%;
+    max-width: 1200px;
+    font-family: Arial, sans-serif;
+}
+
+/* Table styling */
+.student-table {
+    width: 100%;
+    border-collapse: separate; /* Allows border radius */
+    border-spacing: 0; /* Removes gaps between cells */
+    border-radius: 10px; /* Rounds table corners */
+    overflow: hidden; /* Ensures corners are rounded */
+    background-color: white; /* Table body background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+}
+
+/* Table Header Styling */
+.student-table th {
+    background-color: #d3d3d3; /* Gray header background */
+    color: #333; /* Darker text for readability */
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 8px;
+    border-bottom: 2px solid #ccc; /* Slight division for clarity */
+}
+
+/* Table Body Styling */
+.student-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #e0e0e0; /* Gray line for rows */
+}
+
+.student-table tr:last-child td {
+    border-bottom: none; /* Removes bottom border for the last row */
+}
+
+/* Remove vertical and horizontal lines (column lines) */
+.student-table th,
+.student-table td {
+    border-left: none;
+    border-right: none;
+}
+
+/* Table row hover effect */
+.student-table tr:hover {
+    background-color: #f7f7f7; /* Light gray on hover */
+    cursor: pointer;
+}
+
+/* Header styling */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.modal-content form label {
+    display: block;
+    margin: 10px 0;
+}
+
+.modal-content form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.modal-content button {
+    margin: 10px 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* Edit Button */
+.edit-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    height: 38px;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+.delete-button:active {
+    background-color: #cc0000;
+}
+
+.header-style {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional */
+    margin-top: 68px;
+    font-size: 30px;
+    font-weight: bold;
+}

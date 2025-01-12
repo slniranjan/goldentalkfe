@@ -1,0 +1,83 @@
+/* Payment.css */
+
+
+.header-style {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional */
+    margin-top: 68px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* General container for the table */
+.table-container {
+    margin: 20px auto;
+    padding: 10px;
+    width: 90%;
+    max-width: 1200px;
+    font-family: Arial, sans-serif;
+}
+
+/* Table styling */
+.payment-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 29px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Table headers */
+.payment-table th {
+    background-color: gray;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Table rows */
+.payment-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+/* Alternate row background */
+.payment-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+.payment-table tr:hover {
+    background-color: #e0e0e0; /* Slightly darker gray on hover */
+}
+
+/* Rounded corners */
+.payment-table th:first-child,
+.payment-table td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.payment-table th:last-child,
+.payment-table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .payment-table {
+        font-size: 14px;
+    }
+}
+

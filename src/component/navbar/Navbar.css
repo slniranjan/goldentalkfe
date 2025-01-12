@@ -1,0 +1,112 @@
+nav {
+    width: 100%;
+    background: #060f28;
+    color: #fff;
+    padding: 4px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 4px 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+.nav-container {
+    padding-right: 20%;
+    padding-left: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*background-color: #fff;*/
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+    margin: 0 15px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    display: block;
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    padding: 8px 20px;
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+/*Dropdown Selection Background*/
+.dropdown-menu li:hover {
+    background-color: #56e16e;
+}
+
+/*.btn {*/
+/*    padding: 8px 16px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.nav-container ul {
+    /*display: flex;*/
+    /*align-items: center; !* Vertically aligns the home icon with other items *!*/
+    list-style: none; /* Removes default list styling */
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    display: flex;
+    width: 22px;
+    height: 22px;
+    margin-right: 0px;
+    margin-top: 10px;
+}

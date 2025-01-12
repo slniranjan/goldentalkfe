@@ -1,0 +1,15 @@
+networks:
+  gt-network:
+    external: true
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gt-frontend
+    ports:
+      - "80:80"
+    networks:
+      - gt-network
+

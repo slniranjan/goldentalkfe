@@ -1,0 +1,156 @@
+.headers {
+    margin: 53px;
+}
+
+.course-container {
+    padding: 20px;
+}
+
+.course-form {
+    margin-bottom: 20px;
+    background-color: white; /* Set the form background color to white */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds some shadow for better appearance */
+    width: 508px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="checkbox"] {
+    /*width: 100%;*/
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+
+.header-style-1 {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional */
+    margin-top: -30px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* General container for the table */
+/* Table headers */
+.course-table-container {
+    margin: 20px auto;
+    padding: 10px;
+    width: 90%;
+    max-width: 1200px;
+    font-family: Arial, sans-serif;
+}
+
+/* Table styling */
+.course-table {
+    width: 100%;
+    border-collapse: separate; /* Allows border radius */
+    border-spacing: 0; /* Removes gaps between cells */
+    border-radius: 10px; /* Rounds table corners */
+    overflow: hidden; /* Ensures corners are rounded */
+    background-color: white; /* Table body background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+}
+
+/* Table Header Styling */
+.course-table th {
+    background-color: #d3d3d3; /* Gray header background */
+    color: #333; /* Darker text for readability */
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 8px;
+    border-bottom: 2px solid #ccc; /* Slight division for clarity */
+}
+
+/* Table Body Styling */
+.course-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #e0e0e0; /* Gray line for rows */
+}
+
+.course-table tr:last-child td {
+    border-bottom: none; /* Removes bottom border for the last row */
+}
+
+/* Remove vertical and horizontal lines (column lines) */
+.course-table th,
+.course-table td {
+    border-left: none;
+    border-right: none;
+}
+
+/* Table row hover effect */
+.course-table tr:hover {
+    background-color: #f7f7f7; /* Light gray on hover */
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.inline-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds spacing between label and checkbox */
+}
+
+.inline-checkbox label,
+.inline-checkbox input {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px; /* Adjust spacing if needed */
+}
+
+.update-btn {
+    padding: 5px 10px;
+    borderRadius: 5px;
+    backgroundColor: Green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

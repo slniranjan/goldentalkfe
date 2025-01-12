@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: Outfit;
+}
+
+/*.container {*/
+/*  padding: 10%;*/
+/*}*/
+
+.btn {
+  background: #fff;
+  color: #212121;
+  padding: 14px 25px;
+  font-size: 14px;
+  border-radius: 30px;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
