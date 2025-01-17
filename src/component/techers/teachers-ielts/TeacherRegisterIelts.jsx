@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from "react";
 import "../Teacher.css";
-import {baseUrl} from "../../../assets/assets.js";
+import {baseUrl, sectionNameIelts} from "../../../assets/assets.js";
 import axios from "axios";
 import Select from 'react-select';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const TeacherRegisterIelts = () => {
+    const sectionName = sectionNameIelts;
     const [errors, setErrors] = useState({}); // To track validation errors
     const [message, setMessage] = useState("");
     const [options, setOptions] = useState([]);
@@ -101,11 +105,16 @@ const TeacherRegisterIelts = () => {
         }
 
         // Check Phone Number
-        if (
-            !formData.phoneNumber.trim() ||
-            !/^\d{10}$/.test(formData.phoneNumber)
-        ) {
-            newErrors.phoneNumber = "Phone Number must be 10 digits.";
+        // if (!formData.phoneNumber.trim() ||
+        //     /^\\+[1-9]\\d{1,14}$/.test(formData.phoneNumber)
+        // ) {
+        //     newErrors.phoneNumber = "Enter a valid phone number (e.g., +94712345678).";
+        // }
+
+        if (!formData.phoneNumber) {
+            newErrors.phoneNumber = "WhatsApp number is required.";
+        } else if (/^\\+[1-9]\\d{1,14}$/.test(formData.whatsAppNumber)) {
+            newErrors.phoneNumber = "Enter a valid phone number (e.g., +94712345678).";
         }
 
         // Check Section ID
@@ -145,8 +154,34 @@ const TeacherRegisterIelts = () => {
                     body: JSON.stringify(updatedFormData), // Use the updated formData
                 });
 
+                if (response && response.status === 409) {
+                    const errorData = await response.json();  // Correctly parse the JSON response
+
+                    // Show the error message in the toast
+                    toast.error(errorData.errorMessage, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                }
+
                 if (response.ok) {
-                    setMessage("Form submitted successfully!");
+                    // setMessage("Form submitted successfully!");
+                    toast.success("Form submitted successfully!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
                     setFormData({
                         name: "",
                         nic: "",
@@ -158,13 +193,35 @@ const TeacherRegisterIelts = () => {
                     setSelectedCourses([]); // Reset selected courses
                     setErrors({});
                 } else {
-                    setMessage("An error occurred while submitting the form.");
+                    // setMessage("An error occurred while submitting the form.");
+                    const errorData = await response.json();  // Correctly parse the JSON response
+
+                    // Show the error message in the toast
+                    toast.error(errorData.errorMessage, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
                 }
             } catch (error) {
-                setMessage("An error occurred while submitting the form.");
+                console.error("Error during submission:", error);
             }
         } else {
-            setMessage("Please fix the validation errors.");
+            toast.error("Please fix the validation errors.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     };
 
@@ -210,12 +267,20 @@ const TeacherRegisterIelts = () => {
                     {errors.phoneNumber && <p className="error">{errors.phoneNumber}</p>}
 
                     {/* Section ID */}
-                    <label htmlFor="sectionId">Section ID:</label>
+                    {/*<label htmlFor="sectionId">Section ID:</label>*/}
+                    {/*<input*/}
+                    {/*    type="text"*/}
+                    {/*    id="sectionId"*/}
+                    {/*    name="sectionId"*/}
+                    {/*    value={formData.sectionId}*/}
+                    {/*    readOnly*/}
+                    {/*/>*/}
+                    {/*{errors.sectionId && <p className="error">{errors.sectionId}</p>}*/}
+                    <label>Section Name:</label>
                     <input
                         type="text"
-                        id="sectionId"
-                        name="sectionId"
-                        value={formData.sectionId}
+                        name="sectionName"
+                        value={sectionName}
                         readOnly
                     />
                     {errors.sectionId && <p className="error">{errors.sectionId}</p>}
@@ -297,6 +362,7 @@ const TeacherRegisterIelts = () => {
                     Submit
                 </button>
             </form>
+            <ToastContainer />
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import "./Teacher.css"
 import {baseUrl} from "../../assets/assets.js";
+import {useNavigate} from "react-router-dom";
 
 const Teachers = () => {
     const [data, setData] = useState([]);
@@ -16,6 +17,7 @@ const Teachers = () => {
         courseIds: [],
         qualifications: [{ qualification: '', institute: '' }],
     });
+    const navigate = useNavigate();
 
     // Fetch data
     useEffect(() => {
@@ -67,7 +69,7 @@ const Teachers = () => {
         }
     };
 
-    // Handle Form Submission
+    // Handle Update Form Submission
     const handleSubmit = (e) => {
         e.preventDefault();
         if (selectedTeacher) {
@@ -93,6 +95,7 @@ const Teachers = () => {
                         )
                     );
                     setSelectedTeacher(null); // Close the form
+                    navigate(0);
                 })
                 .catch((error) => console.error('Error updating teacher:', error));
         }
@@ -151,7 +154,7 @@ const Teachers = () => {
                 {/* Update Form */}
                 {selectedTeacher && (
                     <div className="update-form-container">
-                        <h3>Update Teacher</h3>
+                        <h1 className='header-style'>Update Teacher</h1>
                         <form onSubmit={handleSubmit}>
                             <div>
                                 <label>Name:</label>
@@ -212,7 +215,7 @@ const Teachers = () => {
                                         value={qual.qualification}
                                         onChange={(e) => handleFormChange(e, index)}
                                     />
-                                    <label>Institute:</label>
+                                    <label className='label-position'>Institute:</label>
                                     <input
                                         type="text"
                                         name="institute"

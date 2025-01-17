@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useTable } from "react-table";
+import React, {useEffect, useState} from "react";
+import {useTable} from "react-table";
 import axios from "axios";
 import EditStudentModal from "./EditStudentModal"; // Import the modal
 import "./Student.css";
 import {baseUrl} from "../../assets/assets.js";
+
 
 const Students = () => {
     const [data, setData] = useState([]);
@@ -11,10 +12,19 @@ const Students = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filterText, setFilterText] = useState("");
 
+    const [studentToDelete, setStudentToDelete] = useState(null);
+
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+    const [filterNic, setFilterNic] = useState("");
+    const [filterWhatsApp, setFilterWhatsApp] = useState("");
+
+
+
     // Fetch data from API
     useEffect(() => {
         axios
-            .get(baseUrl +"students?deleted=false")
+            .get(baseUrl + "students?deleted=false")
             .then((response) => {
                 const students = response.data.map((student) => ({
                     studentId: student.studentId,
@@ -22,6 +32,8 @@ const Students = () => {
                     middleName: student.middleName || "",
                     lastName: student.lastName || "",
                     whatsAppNum: student.whatsAppNum || "",
+                    nic: student.nic || "N/A",
+                    email: student.email || "N/A",
                     section: student.section.join(", ") || "N/A",
                     course: student.course.join(", ") || "N/A",
                     paymentStatus: student.payments[0]?.paymentStatus || "N/A",
@@ -58,7 +70,7 @@ const Students = () => {
                 setData((prevData) =>
                     prevData.map((student) =>
                         student.studentId === studentId
-                            ? { ...student, secondPaymentAmount: value }
+                            ? {...student, secondPaymentAmount: value}
                             : student
                     )
                 );
@@ -74,7 +86,8 @@ const Students = () => {
             .delete(baseUrl + `students/${studentId}`)
             .then(() => {
                 // Update the data locally after successful DELETE
-                setData((prevData) => prevData.filter((student) => student.studentId !== studentId));
+                setData((prevData) => prevData
+                    .filter((student) => student.studentId !== studentId));
             })
             .catch((error) => {
                 console.error("Error deleting student:", error);
@@ -83,28 +96,33 @@ const Students = () => {
 
     // Filter data based on studentId ID
     const filteredData = data.filter(student =>
-        student.studentId.toString().includes(filterText)
+        student.studentId.toString().includes(filterText) &&
+        student.whatsAppNum.toString().includes(filterWhatsApp) &&
+        student.nic.toString().includes(filterNic)
+
     );
 
     // Define columns
     const columns = React.useMemo(
         () => [
-            { Header: "First Name", accessor: "firstName" },
-            { Header: "Middle Name", accessor: "middleName" },
-            { Header: "Last Name", accessor: "lastName" },
-            { Header: "WhatsApp Number", accessor: "whatsAppNum" },
-            { Header: "Section", accessor: "section" },
-            { Header: "Course", accessor: "course" },
-            { Header: "Payment Status", accessor: "paymentStatus" },
+            {Header: "First Name", accessor: "firstName"},
+            {Header: "Middle Name", accessor: "middleName"},
+            {Header: "Last Name", accessor: "lastName"},
+            {Header: "WhatsApp Number", accessor: "whatsAppNum"},
+            {Header: "NIC", accessor: "nic"},
+            {Header: "Email", accessor: "email"},
+            // {Header: "Section", accessor: "section"},
+            {Header: "Course", accessor: "course"},
+            {Header: "Payment Status", accessor: "paymentStatus"},
             {
                 Header: "First Payment Amount",
                 accessor: "firstPaymentAmount",
-                Cell: ({ value }) => `Rs. ${(value || 0).toFixed(2)}`,
+                Cell: ({value}) => `Rs. ${(value || 0).toFixed(2)}`,
             },
             {
                 Header: "Second Payment Amount",
                 accessor: "secondPaymentAmount",
-                Cell: ({ row, value }) => {
+                Cell: ({row, value}) => {
                     const [editValue, setEditValue] = useState(value || 0);
 
                     return (
@@ -119,14 +137,15 @@ const Students = () => {
                                     parseFloat(editValue)
                                 )
                             }
-                            style={{ width: "100%", border: "none", textAlign: "right" }}
+                            style={{width: "100%", border: "none", textAlign: "right"}}
                         />
                     );
                 },
             },
             {
-                Header: "Actions",
-                Cell: ({ row }) => (
+                id: "actions",
+                Header: () => null,
+                Cell: ({row}) => (
                     <button
                         className="edit-button"
                         onClick={() => openModal(row.original)}
@@ -136,11 +155,15 @@ const Students = () => {
                 ),
             },
             {
-                Header: "Delete",
-                Cell: ({ row }) => (
+                id: "delete",
+                Header: () => null,
+                Cell: ({row}) => (
                     <button
                         className="delete-button"
-                        onClick={() => handleDeleteStudent(row.original.studentId)}
+                        onClick={() => {
+                            setStudentToDelete(row.original.studentId);
+                            setIsConfirmOpen(true);
+                        }}
                     >
                         Delete
                     </button>
@@ -156,7 +179,7 @@ const Students = () => {
         headerGroups,
         rows,
         prepareRow,
-    } = useTable({ columns, data:filteredData});
+    } = useTable({columns, data: filteredData});
 
     return (
         <div className="student-table-container">
@@ -171,6 +194,23 @@ const Students = () => {
                     value={filterText}
                     onChange={(e) => setFilterText(e.target.value)}
                     style={{marginBottom: "10px", padding: "5px", borderRadius: "10px"}}
+                />
+                <input
+                    id="filter-whatsapp"
+                    placeholder="Filter by WhatsApp Number"
+                    type="text"
+                    value={filterWhatsApp}
+                    onChange={(e) => setFilterWhatsApp(e.target.value)}
+                    style={{marginBottom: "10px", padding: "5px", borderRadius: "10px", marginLeft: "30px"}}
+                />
+
+                <input
+                    id="filter-nic"
+                    placeholder="Filter by NIC"
+                    type="text"
+                    value={filterNic}
+                    onChange={(e) => setFilterNic(e.target.value)}
+                    style={{marginBottom: "10px", padding: "5px", borderRadius: "10px", marginLeft: "30px"}}
                 />
             </div>
 
@@ -212,6 +252,25 @@ const Students = () => {
                 })}
                 </tbody>
             </table>
+
+            {/*Confirmation Modal */}
+            {isConfirmOpen && (
+                <div className="confirm-modal">
+                    <div className="confirm-content">
+                        <p className='warning-text'>Are you sure you want to delete this student?</p>
+                        <button
+                            onClick={() => {
+                                handleDeleteStudent(studentToDelete);
+                                setIsConfirmOpen(false);
+                            }}
+                            style={{backgroundColor: "red", color: "white", marginRight: "10px"}}
+                        >
+                            Yes, Delete
+                        </button>
+                        <button onClick={() => setIsConfirmOpen(false)}>Cancel</button>
+                    </div>
+                </div>
+            )}
 
             {/* Edit Modal */}
             {isModalOpen && (

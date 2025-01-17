@@ -3,6 +3,9 @@ import axios from "axios";
 import {baseUrl} from "../../../assets/assets.js";
 import Select from "react-select";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const TeacherRegisterPte = () => {
     const [errors, setErrors] = useState({}); // To track validation errors
@@ -146,7 +149,18 @@ const TeacherRegisterPte = () => {
                 });
 
                 if (response.ok) {
-                    setMessage("Form submitted successfully!");
+                    //
+                    toast.success("Form submitted successfully!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+
                     setFormData({
                         name: "",
                         nic: "",
@@ -164,7 +178,17 @@ const TeacherRegisterPte = () => {
                 setMessage("An error occurred while submitting the form.");
             }
         } else {
-            setMessage("Please fix the validation errors.");
+            // setMessage("Please fix the validation errors.");
+            toast.error("Please fix the validation errors.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         }
     };
 
@@ -297,6 +321,7 @@ const TeacherRegisterPte = () => {
                     Submit
                 </button>
             </form>
+            <ToastContainer />
         </div>
     );
 };

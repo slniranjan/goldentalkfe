@@ -77,33 +77,33 @@ const NavBar = () => {
                         )}
                     </li>
 
-                    <li
-                        onMouseEnter={() => toggleDropdown("PTE")}
-                        onMouseLeave={() => toggleDropdown(null)}
-                        className="nav-item"
-                    >
-                        <Link to="#">PTE</Link>
-                        {dropdown === "PTE" && (
-                            <ul className="dropdown-menu">
-                                <li><Link to="/student-register-pte">Student Register</Link></li>
-                                <li><Link to="/teacher-register-pte">Teacher Register</Link></li>
-                            </ul>
-                        )}
-                    </li>
+                    {/*<li*/}
+                    {/*    onMouseEnter={() => toggleDropdown("PTE")}*/}
+                    {/*    onMouseLeave={() => toggleDropdown(null)}*/}
+                    {/*    className="nav-item"*/}
+                    {/*>*/}
+                    {/*    <Link to="#">PTE</Link>*/}
+                    {/*    {dropdown === "PTE" && (*/}
+                    {/*        <ul className="dropdown-menu">*/}
+                    {/*            <li><Link to="/student-register-pte">Student Register</Link></li>*/}
+                    {/*            <li><Link to="/teacher-register-pte">Teacher Register</Link></li>*/}
+                    {/*        </ul>*/}
+                    {/*    )}*/}
+                    {/*</li>*/}
 
-                    <li
-                        onMouseEnter={() => toggleDropdown("OET")}
-                        onMouseLeave={() => toggleDropdown(null)}
-                        className="nav-item"
-                    >
-                        <Link to="#">OET</Link>
-                        {dropdown === "OET" && (
-                            <ul className="dropdown-menu">
-                                <li><Link to="/student-register-oet">Student Register</Link></li>
-                                <li><Link to="/teacher-register-oet">Teacher Register</Link></li>
-                            </ul>
-                        )}
-                    </li>
+                    {/*<li*/}
+                    {/*    onMouseEnter={() => toggleDropdown("OET")}*/}
+                    {/*    onMouseLeave={() => toggleDropdown(null)}*/}
+                    {/*    className="nav-item"*/}
+                    {/*>*/}
+                    {/*    <Link to="#">OET</Link>*/}
+                    {/*    {dropdown === "OET" && (*/}
+                    {/*        <ul className="dropdown-menu">*/}
+                    {/*            <li><Link to="/student-register-oet">Student Register</Link></li>*/}
+                    {/*            <li><Link to="/teacher-register-oet">Teacher Register</Link></li>*/}
+                    {/*        </ul>*/}
+                    {/*    )}*/}
+                    {/*</li>*/}
 
                     <li>
                         <button className='btn'>Sign Up</button>

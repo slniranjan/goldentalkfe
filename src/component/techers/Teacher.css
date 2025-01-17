@@ -240,3 +240,7 @@ button:focus {
     width: 200px;
 }
 
+/*Institute Label Position*/
+.label-position {
+    margin-left: 50px;
+}

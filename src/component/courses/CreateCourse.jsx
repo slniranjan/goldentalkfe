@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Course.css";
-import {baseUrl} from "../../assets/assets.js";
+import {baseUrl, sectionIdIelts, sectionNameIelts} from "../../assets/assets.js";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateCourse = () => {
+    const sectionName = sectionNameIelts;
     const [formData, setFormData] = useState({
         category: "",
         name: "",
         fee: "",
-        sectionId: "",
+        sectionId: sectionIdIelts,
         installment: false,
     });
 
@@ -16,11 +20,13 @@ const CreateCourse = () => {
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
+
         setFormData((prev) => ({
             ...prev,
             [name]: type === "checkbox" ? checked : value,
         }));
     };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +56,16 @@ const CreateCourse = () => {
         axios
             .post(baseUrl + "courses", courseData)
             .then((response) => {
-                alert("Course added successfully");
+                toast.success("Course Created successfully!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });
                 setFormData({
                     category: "",
                     name: "",
@@ -71,12 +86,20 @@ const CreateCourse = () => {
                 <h1>Course Register</h1>
                 <div className="form-group">
                     <label>Category</label>
-                    <input
-                        type="text"
-                        name="category"
+                    <select
+                        id="section-select"
+                        name="category"    // ✅ Added name attribute to bind with formData
                         value={formData.category}
                         onChange={handleChange}
-                    />
+                    >
+                        <option value="">-- Select Category --</option>
+                        <option value="simple">Simple</option>
+                        <option value="package">Package</option>
+                        <option value="seminar">Seminar</option>
+                    </select>
+
+
+                    <p>Selected Section: {formData.category}</p>
                     {errors.category && <div className="error">{errors.category}</div>}
                 </div>
 
@@ -104,13 +127,14 @@ const CreateCourse = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Section ID</label>
+                    <label>Section Name</label>
                     <input
-                        type="number"
-                        name="sectionId"
-                        value={formData.sectionId}
-                        onChange={handleChange}
-                        min="1"
+                        type="text"
+                        name="sectionName"
+                        value={sectionName}
+                        // onChange={handleChange}
+                        // min="1"
+                        readOnly
                     />
                     {errors.sectionId && <div className="error">{errors.sectionId}</div>}
                 </div>
@@ -128,6 +152,7 @@ const CreateCourse = () => {
 
                 <button type="submit">Submit</button>
             </form>
+            <ToastContainer />
         </div>
     );
 };

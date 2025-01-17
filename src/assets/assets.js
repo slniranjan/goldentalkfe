@@ -23,3 +23,12 @@ export const images = {
 }
 
 export const baseUrl = "http://localhost:8080/gt/api/v1/";
+
+export const sectionIdIelts = 1;
+export const sectionNameIelts = "IELTS";
+
+export const sectionIdPte = 2;
+export const sectionNamePte = "PTE";
+
+export const sectionIdOet = 3;
+export const sectionNameOet = "OET";

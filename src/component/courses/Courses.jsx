@@ -40,8 +40,7 @@ const Courses = () => {
         setIsModalOpen(true);
     };
 
-    // Handle form submission
-    // Handle form submission
+    // Handle the Update form submission
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
@@ -179,55 +178,65 @@ const Courses = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <h2>Update Course</h2>
-                        <form onSubmit={handleFormSubmit}>
-                            <label>
-                                Category:
-                                <input
-                                    type="text"
-                                    name="category"
+                        <form onSubmit={handleFormSubmit} className="form-grid">
+
+                            <div className="form-group1">
+                                <label>Category</label>
+                                <select
+                                    id="section-select"
+                                    name="category"    // ✅ Added name attribute to bind with formData
                                     value={selectedCourse.category}
                                     onChange={handleInputChange}
-                                />
-                            </label>
-                            <br/>
-                            <label>
-                                Name:
+                                >
+                                    <option value="">-- Select Category --</option>
+                                    <option value="simple">Simple</option>
+                                    <option value="package">Package</option>
+                                    <option value="seminar">Seminar</option>
+                                </select>
+
+
+                                <p>Selected Section: {selectedCourse.category}</p>
+                            </div>
+
+                            <div className="form-group1">
+                                <label htmlFor="name">Name:</label>
                                 <input
                                     type="text"
+                                    id="name"
                                     name="name"
                                     value={selectedCourse.name}
                                     onChange={handleInputChange}
                                 />
-                            </label>
-                            <br/>
-                            <label>
-                                Fee:
+                            </div>
+
+                            <div className="form-group1">
+                                <label htmlFor="fee">Fee:</label>
                                 <input
                                     type="number"
+                                    id="fee"
                                     name="fee"
                                     value={selectedCourse.fee}
                                     onChange={handleInputChange}
                                 />
-                            </label>
-                            <br/>
-                            <label className="inline-checkbox">
-                                Installment Available:
+                            </div>
+
+                            <div className="form-group checkbox-group">
+                                <label htmlFor="installment">Installment Available:</label>
                                 <input
                                     type="checkbox"
+                                    id="installment"
                                     name="installment"
                                     checked={selectedCourse.installment}
                                     onChange={handleInputChange}
                                 />
-                            </label>
-                            <br/>
-                            <button type="submit">Save</button>
-                            <button
-                                type="button"
-                                onClick={() => setIsModalOpen(false)}
-                                style={{marginLeft: "10px"}}
-                            >
-                                Cancel
-                            </button>
+                            </div>
+
+                            <div className="button-group">
+                                <button type="submit">Save</button>
+                                <button type="button" onClick={() => setIsModalOpen(false)}>
+                                    Cancel
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
