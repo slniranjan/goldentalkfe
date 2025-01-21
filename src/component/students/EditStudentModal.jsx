@@ -8,7 +8,9 @@ const EditStudentModal = ({ student, onClose, onSave }) => {
         firstName: student.firstName,
         middleName: student.middleName,
         lastName: student.lastName,
+        nic: student.nic || "N/A",
         whatsAppNumber: student.whatsAppNum,
+        email: student.email || "N/A",
         sectionId: student.section.split(",").map(Number),
         courseIds: student.course.split(",").map(Number),
     });
@@ -31,6 +33,8 @@ const EditStudentModal = ({ student, onClose, onSave }) => {
             })
             .then((response) => {
                 onSave(response.data);
+                /*Reload the webpage*/
+                window.location.reload();
             })
             .catch((error) => {
                 console.error("Error updating student:", error);
@@ -75,6 +79,15 @@ const EditStudentModal = ({ student, onClose, onSave }) => {
                             type="text"
                             name="whatsAppNumber"
                             value={formData.whatsAppNumber}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        NIC:
+                        <input
+                            type="text"
+                            name="nic"
+                            value={formData.nic}
                             onChange={handleChange}
                         />
                     </label>

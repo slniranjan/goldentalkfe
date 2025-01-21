@@ -4,6 +4,7 @@ import axios from "axios";
 import EditStudentModal from "./EditStudentModal"; // Import the modal
 import "./Student.css";
 import {baseUrl} from "../../assets/assets.js";
+import SecondPaymentModal from "./SecondPaymentModal.jsx";
 
 
 const Students = () => {
@@ -18,7 +19,7 @@ const Students = () => {
 
     const [filterNic, setFilterNic] = useState("");
     const [filterWhatsApp, setFilterWhatsApp] = useState("");
-
+    const [isSecondPaymentModalOpen, setIsSecondPaymentModalOpen] = useState(false);
 
 
     // Fetch data from API
@@ -34,8 +35,10 @@ const Students = () => {
                     whatsAppNum: student.whatsAppNum || "",
                     nic: student.nic || "N/A",
                     email: student.email || "N/A",
-                    section: student.section.join(", ") || "N/A",
-                    course: student.course.join(", ") || "N/A",
+                    section: student.section[0]?.sectionName || "N/A",
+                    course: student.course[0]?.courseName || "N/A",
+                    courseFees: student.course[0]?.courseFee || "N/A",
+                    courseId: student.course[0]?.id || 0,
                     paymentStatus: student.payments[0]?.paymentStatus || "N/A",
                     firstPaymentAmount: student.payments[0]?.firstPaymentAmount || 0,
                     secondPaymentAmount: student.payments[0]?.secondPaymentAmount || 0,
@@ -57,6 +60,16 @@ const Students = () => {
     const closeModal = () => {
         setSelectedStudent(null);
         setIsModalOpen(false);
+    };
+
+    const closeSecondPaymentModal = () => {
+        setSelectedStudent(null);
+        setIsSecondPaymentModalOpen(false);
+    };
+
+    const openSecondPaymentModal = (student) => {
+        setSelectedStudent(student);
+        setIsSecondPaymentModalOpen(true);
     };
 
     // Handle editing Second Payment Amount
@@ -96,51 +109,56 @@ const Students = () => {
 
     // Filter data based on studentId ID
     const filteredData = data.filter(student =>
-        student.studentId.toString().includes(filterText) &&
-        student.whatsAppNum.toString().includes(filterWhatsApp) &&
-        student.nic.toString().includes(filterNic)
-
+        (student.studentId?.toString() || "").includes(filterText) &&
+        (student.whatsAppNum?.toString() || "").includes(filterWhatsApp) &&
+        (student.nic?.toString() || "").includes(filterNic)
     );
 
     // Define columns
     const columns = React.useMemo(
         () => [
             {Header: "First Name", accessor: "firstName"},
-            {Header: "Middle Name", accessor: "middleName"},
+            // {Header: "Middle Name", accessor: "middleName"},
             {Header: "Last Name", accessor: "lastName"},
             {Header: "WhatsApp Number", accessor: "whatsAppNum"},
             {Header: "NIC", accessor: "nic"},
             {Header: "Email", accessor: "email"},
             // {Header: "Section", accessor: "section"},
             {Header: "Course", accessor: "course"},
+            {Header: "CourseFee", accessor: "courseFees"},
             {Header: "Payment Status", accessor: "paymentStatus"},
             {
                 Header: "First Payment Amount",
                 accessor: "firstPaymentAmount",
                 Cell: ({value}) => `Rs. ${(value || 0).toFixed(2)}`,
             },
+            // {
+            //     Header: "Second Payment Amount",
+            //     accessor: "secondPaymentAmount",
+            //     Cell: ({row, value}) => {
+            //         const [editValue, setEditValue] = useState(value || 0);
+            //
+            //         return (
+            //             <input
+            //                 type="number"
+            //                 value={editValue}
+            //                 onChange={(e) => setEditValue(e.target.value)}
+            //                 onBlur={() =>
+            //                     handleSecondPaymentBlur(
+            //                         row.original.studentId,
+            //                         1, // Replace with actual courseId if needed
+            //                         parseFloat(editValue)
+            //                     )
+            //                 }
+            //                 style={{width: "100%", border: "none", textAlign: "right"}}
+            //             />
+            //         );
+            //     },
+            // },
             {
                 Header: "Second Payment Amount",
                 accessor: "secondPaymentAmount",
-                Cell: ({row, value}) => {
-                    const [editValue, setEditValue] = useState(value || 0);
-
-                    return (
-                        <input
-                            type="number"
-                            value={editValue}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            onBlur={() =>
-                                handleSecondPaymentBlur(
-                                    row.original.studentId,
-                                    1, // Replace with actual courseId if needed
-                                    parseFloat(editValue)
-                                )
-                            }
-                            style={{width: "100%", border: "none", textAlign: "right"}}
-                        />
-                    );
-                },
+                Cell: ({value}) => `Rs. ${(value || 0).toFixed(2)}`,
             },
             {
                 id: "actions",
@@ -166,6 +184,18 @@ const Students = () => {
                         }}
                     >
                         Delete
+                    </button>
+                ),
+            },
+            {
+                id: "secondPayment",
+                Header: () => null,
+                Cell: ({row}) => (
+                    <button className="second-payment-button" onClick={() =>
+                        openSecondPaymentModal(row.original)}
+                            disabled={row.original.paymentStatus === "COMPLETED"}
+                    >
+                        Update Payment
                     </button>
                 ),
             },
@@ -253,6 +283,7 @@ const Students = () => {
                 </tbody>
             </table>
 
+            {/*Modal Section*/}
             {/*Confirmation Modal */}
             {isConfirmOpen && (
                 <div className="confirm-modal">
@@ -288,6 +319,11 @@ const Students = () => {
                         closeModal();
                     }}
                 />
+            )}
+
+            {/*Second Payment Model*/}
+            {isSecondPaymentModalOpen && (
+                <SecondPaymentModal student={selectedStudent} onClose={closeSecondPaymentModal}/>
             )}
         </div>
     );

@@ -48,6 +48,9 @@ function App() {
                     <Route path="/student-register-oet" element={<StudentRegisterOet/>}/>
                     <Route path="/teacher-register-oet" element={<TeacherRegisterOet/>}/>
 
+                    {/*SignUp*/}
+                    {/*<Route path="/sign-up" element={<SignUp/>}/>*/}
+
                 </Routes>
             </Router>
         </div>

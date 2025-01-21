@@ -54,11 +54,13 @@ const StudentRegisterIelts = () => {
 
         if (!formData.firstName) newErrors.firstName = "First name is required.";
         if (!formData.lastName) newErrors.lastName = "Last name is required.";
+
         if (!formData.whatsAppNumber) {
-            newErrors.whatsAppNumber = "WhatsApp number is required.";
-        } else if (/^\\+[1-9]\\d{1,14}$/.test(formData.whatsAppNumber)) {
+            newErrors.whatsAppNumber = "Phone number is required.";
+        } else if (!/^\+\d{1,15}$/.test(formData.whatsAppNumber)) {
             newErrors.whatsAppNumber = "Enter a valid phone number (e.g., +94712345678).";
         }
+
         if (!formData.nic) newErrors.nic = "NIC is required.";
         // Check NIC
         if (!formData.nic.trim() || formData.nic.length < 10) {
@@ -69,6 +71,7 @@ const StudentRegisterIelts = () => {
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
             newErrors.email = "Enter a valid email Id (e.g., test@example.com).";
         }
+
         if (!formData.address.street) newErrors.street = "Street is required.";
         if (!formData.address.city) newErrors.city = "City is required.";
         if (!formData.address.district) newErrors.district = "District is required.";
@@ -162,6 +165,34 @@ const StudentRegisterIelts = () => {
                     });
                 }
 
+                if (response && response.status === 400) {
+                    const errorData = await response.json(); // Parse the JSON response
+
+                    // Assuming you want to show the error message from the first object in the array
+                    if (Array.isArray(errorData) && errorData.length > 0) {
+                        const firstErrorMessage = errorData[0]?.errorMessage || "Unknown error occurred";
+
+                        // Show the error message in the toast
+                        toast.error(firstErrorMessage, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                        });
+                    } else {
+                        toast.error("Unexpected error format", {
+                            position: "top-right",
+                            autoClose: 3000,
+                            theme: "colored",
+                        });
+                    }
+                }
+
+
                 if (response.ok) {
 
                     toast.success("Form submitted successfully!", {
@@ -184,6 +215,7 @@ const StudentRegisterIelts = () => {
                     // Log the error response
                     console.log("Error response data:", errorData);
                     // setMessage(`Error: ${errorData.message}`);
+
                 }
             } catch (error) {
                 // Log the error details
@@ -327,7 +359,7 @@ const StudentRegisterIelts = () => {
                 />
                 {errors.sectionId && <span className="error">{errors.sectionId}</span>}
 
-                <label>Course ID</label>
+                <label>Course Name</label>
                 <select
                     id="courseDropdown"
                     onChange={(e) => {
@@ -349,6 +381,7 @@ const StudentRegisterIelts = () => {
                         </option>
                     ))}
                 </select>
+                {errors.courseId && <span className="error">{errors.courseId}</span>}
 
                 {/* Payment Details */}
                 <label>Payment Amount</label>
