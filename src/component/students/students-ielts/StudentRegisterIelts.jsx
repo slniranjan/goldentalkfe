@@ -27,6 +27,7 @@ const StudentRegisterIelts = () => {
             firstPaymentAmount: "",
             secondPaymentAmount: "",
         },
+        earlyBird: false
     });
 
 
@@ -63,8 +64,8 @@ const StudentRegisterIelts = () => {
 
         if (!formData.nic) newErrors.nic = "NIC is required.";
         // Check NIC
-        if (!formData.nic.trim() || formData.nic.length < 10) {
-            newErrors.nic = "NIC must be at least 10 characters.";
+        if (!formData.nic.trim() || 10 <= formData.nic.length <= 12) {
+            newErrors.nic = "NIC must be between 10 to 12 characters.";
         }
         if (!formData.email) {
             newErrors.email = "Email is required.";
@@ -402,6 +403,15 @@ const StudentRegisterIelts = () => {
                 {/*    value={formData.payment.secondPaymentAmount}*/}
                 {/*    onChange={handleChange}*/}
                 {/*/>*/}
+
+                <label htmlFor="earlyBird">Early Bird</label>
+                    <input
+                        type="checkbox"
+                        id="earlyBird"
+                        name="earlyBird"
+                        checked={formData.earlyBird}
+                        onChange={handleChange}
+                    />
 
                 <button type="submit" className="submit-button">
                     Submit
