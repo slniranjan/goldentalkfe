@@ -35,6 +35,7 @@ const Courses = () => {
             category: course.category,
             name: course.courseName, // Map courseName to name
             fee: course.courseFee, // Map courseFee to fee
+            discount: course.discount, // Map discount to discount
             installment: course.installment,
         });
         setIsModalOpen(true);
@@ -89,6 +90,11 @@ const Courses = () => {
                 Header: "Course Fee",
                 accessor: "courseFee",
                 Cell: ({value}) => `Rs. ${value.toFixed(2)}`, // Format fee
+            },
+            {
+                Header: "Discount",
+                accessor: "discount",
+                Cell: ({value}) => `Rs. ${value.toFixed(2)}`, // Format discount
             },
             {
                 Header: "Installment Available",
@@ -216,6 +222,17 @@ const Courses = () => {
                                     id="fee"
                                     name="fee"
                                     value={selectedCourse.fee}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="form-group1">
+                                <label htmlFor="discount">Discount:</label>
+                                <input
+                                    type="number"
+                                    id="discount"
+                                    name="discount"
+                                    value={selectedCourse.discount}
                                     onChange={handleInputChange}
                                 />
                             </div>

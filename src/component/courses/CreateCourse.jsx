@@ -12,6 +12,7 @@ const CreateCourse = () => {
         category: "",
         name: "",
         fee: "",
+        discount: "",
         sectionId: sectionIdIelts,
         installment: false,
     });
@@ -37,6 +38,8 @@ const CreateCourse = () => {
         if (!formData.name) formErrors.name = "Name is required";
         if (!formData.fee || isNaN(formData.fee) || formData.fee <= 0)
             formErrors.fee = "Fee must be a positive number";
+        if (!formData.discount || isNaN(formData.discount) || formData.discount <= 0)
+            formErrors.discount = "Discount must be a positive number";
         if (!formData.sectionId || isNaN(formData.sectionId) || formData.sectionId <= 0)
             formErrors.sectionId = "Section ID must be a positive integer";
 
@@ -49,6 +52,7 @@ const CreateCourse = () => {
         const courseData = {
             ...formData,
             fee: parseInt(formData.fee, 10), // Convert fee to integer
+            discount: parseInt(formData.discount, 10), // Convert discount to integer
             sectionId: parseInt(formData.sectionId, 10), // Convert sectionId to integer
         };
 
@@ -70,6 +74,7 @@ const CreateCourse = () => {
                     category: "",
                     name: "",
                     fee: "",
+                    discount: "",
                     sectionId: "",
                     installment: false,
                 });
@@ -124,6 +129,18 @@ const CreateCourse = () => {
                         min="1"
                     />
                     {errors.fee && <div className="error">{errors.fee}</div>}
+                </div>
+
+                <div className="form-group">
+                    <label>Discount</label>
+                    <input
+                        type="number"
+                        name="discount"
+                        value={formData.discount}
+                        onChange={handleChange}
+                        min="1"
+                    />
+                    {errors.discount && <div className="error">{errors.discount}</div>}
                 </div>
 
                 <div className="form-group">
