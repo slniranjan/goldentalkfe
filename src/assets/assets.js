@@ -22,8 +22,7 @@ export const images = {
     home,
 }
 
-export const baseUrl = process.env.REACT_APP_API_URL + "/gt/api/v1/" || "http://gt-backend:8080/gt/api/v1/";
-// export const baseUrl = "http://gt-backend:8080/gt/api/v1/";
+export const baseUrl = "http://15.206.77.34:8080/gt/api/v1/";
 
 export const sectionIdIelts = 1;
 export const sectionNameIelts = "IELTS";
