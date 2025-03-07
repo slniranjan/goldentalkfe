@@ -62,19 +62,9 @@ const StudentRegisterIelts = () => {
             newErrors.whatsAppNumber = "Enter a valid number (e.g., +94712345678).";
         }
 
-        console.log(formData.nic.length)
-
         if (!formData.nic.trim() || formData.nic.length < 10 || formData.nic.length > 12) {
             newErrors.nic = "NIC must be between 10 to 12 characters.";
         }
-
-        // if (!formData.nic) newErrors.nic = "NIC is required.";
-        // Check NIC
-        // if (!formData.nic.trim() || 10 <= formData.nic.length <= 12) {
-        //     newErrors.nic = "NIC must be between 10 to 12 characters.";
-        // }
-
-        
 
         if (!formData.email) {
             newErrors.email = "Email is required.";
