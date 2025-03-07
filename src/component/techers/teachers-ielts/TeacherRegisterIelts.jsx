@@ -188,6 +188,17 @@ const TeacherRegisterIelts = () => {
                             progress: undefined,
                             theme: "colored",
                         });
+                    } else if (!errorData?.errorMessage?.trim()) {
+                        toast.error(errorData.errorMessage, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                        });
                     } else {
                         toast.error("Unexpected error format", {
                             position: "top-right",
