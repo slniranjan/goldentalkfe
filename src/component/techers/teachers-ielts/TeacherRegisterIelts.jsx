@@ -190,7 +190,7 @@ const TeacherRegisterIelts = () => {
                             progress: undefined,
                             theme: "colored",
                         });
-                    } else if (!errorData?.errorMessage?.trim()) {
+                    } else if (errorData?.errorMessage?.trim()) {
                         toast.error(errorData.errorMessage, {
                             position: "top-right",
                             autoClose: 3000,
