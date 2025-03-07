@@ -173,6 +173,8 @@ const TeacherRegisterIelts = () => {
                 if (response && response.status === 400) {
                     const errorData = await response.json(); // Parse the JSON response
 
+                    console.log(errorData)
+
                     // Assuming you want to show the error message from the first object in the array
                     if (Array.isArray(errorData) && errorData.length > 0) {
                         const firstErrorMessage = errorData[0]?.errorMessage || "Unknown error occurred";
