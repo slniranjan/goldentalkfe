@@ -68,8 +68,8 @@ const StudentRegisterIelts = () => {
         //     newErrors.nic = "NIC must be between 10 to 12 characters.";
         // }
 
-        if (!formData.nic.trim() || formData.nic.length < 10) {
-            newErrors.nic = "NIC must be at least 10 characters.";
+        if (!formData.nic.trim() || 10 <= formData.nic.length <= 12) {
+            newErrors.nic = "NIC must be between 10 to 12 characters.";
         }
 
         if (!formData.email) {
