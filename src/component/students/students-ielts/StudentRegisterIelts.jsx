@@ -96,7 +96,7 @@ const StudentRegisterIelts = () => {
 
     // Handle input changes
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const {name, value, type, checked} = e.target;
         /*Convert String to Int*/
         if (name.includes("payment.")) {
             // Extract the payment key (e.g., "firstPaymentAmount", "secondPaymentAmount")
