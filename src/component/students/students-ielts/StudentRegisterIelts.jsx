@@ -57,9 +57,9 @@ const StudentRegisterIelts = () => {
         if (!formData.lastName) newErrors.lastName = "Last name is required.";
 
         if (!formData.whatsAppNumber) {
-            newErrors.whatsAppNumber = "Phone number is required.";
+            newErrors.whatsAppNumber = "WhatsApp number is required.";
         } else if (!/^\+\d{1,15}$/.test(formData.whatsAppNumber)) {
-            newErrors.whatsAppNumber = "Enter a valid phone number (e.g., +94712345678).";
+            newErrors.whatsAppNumber = "Enter a valid number (e.g., +94712345678).";
         }
 
         // if (!formData.nic) newErrors.nic = "NIC is required.";
@@ -180,6 +180,17 @@ const StudentRegisterIelts = () => {
 
                         // Show the error message in the toast
                         toast.error(firstErrorMessage, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                        });
+                    } else if (errorData?.errorMessage?.trim()) {
+                        toast.error(errorData.errorMessage, {
                             position: "top-right",
                             autoClose: 3000,
                             hideProgressBar: false,
