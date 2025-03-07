@@ -27,7 +27,7 @@ const StudentRegisterIelts = () => {
             firstPaymentAmount: "",
             secondPaymentAmount: "",
         },
-        earlyBird: false
+        earlyBird: false,
     });
 
 
@@ -130,7 +130,7 @@ const StudentRegisterIelts = () => {
         } else {
             setFormData((prev) => ({
                 ...prev,
-                [name]: value,
+                [name]: type === "checkbox" ? checked : value,
             }));
         }
     };
