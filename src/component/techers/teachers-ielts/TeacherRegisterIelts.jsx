@@ -6,6 +6,7 @@ import Select from 'react-select';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import React from 'react';
 
 const TeacherRegisterIelts = () => {
     const sectionName = sectionNameIelts;
@@ -168,6 +169,33 @@ const TeacherRegisterIelts = () => {
                         progress: undefined,
                         theme: "colored",
                     });
+                }
+
+                if (response && response.status === 400) {
+                    const errorData = await response.json(); // Parse the JSON response
+
+                    // Assuming you want to show the error message from the first object in the array
+                    if (Array.isArray(errorData) && errorData.length > 0) {
+                        const firstErrorMessage = errorData[0]?.errorMessage || "Unknown error occurred";
+
+                        // Show the error message in the toast
+                        toast.error(firstErrorMessage, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                        });
+                    } else {
+                        toast.error("Unexpected error format", {
+                            position: "top-right",
+                            autoClose: 3000,
+                            theme: "colored",
+                        });
+                    }
                 }
 
                 if (response.ok) {
